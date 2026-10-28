@@ -1,0 +1,33 @@
+name: Arkhe local protocol and EVM
+on:
+  push:
+    paths: ['arkhe/**', '.github/workflows/arkhe-tests.yml']
+  pull_request:
+    paths: ['arkhe/**', '.github/workflows/arkhe-tests.yml']
+permissions:
+  contents: read
+jobs:
+  execution:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install fixed Python test tools
+        run: python -m pip install -r arkhe/python/requirements.txt
+      - name: Install Rust toolchain
+        run: rustup toolchain install 1.96.0 --profile minimal --component clippy
+      - name: Execute standalone tests
+        shell: pwsh
+        run: ./arkhe/run-tests.ps1 -InstallNodeDependencies
+      - name: Preserve execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arkhe-test-results
+          path: arkhe/test-results/

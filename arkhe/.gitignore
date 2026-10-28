@@ -1,0 +1,6 @@
+node_modules/
+.venv/
+__pycache__/
+protocol/target/
+test-results/
+!protocol/Cargo.lock

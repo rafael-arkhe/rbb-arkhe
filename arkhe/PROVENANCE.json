@@ -1,0 +1,126 @@
+{
+  "format": "arkhe-rbb-port/1",
+  "base_commit": "a3069c60eabb0f99535fe904b9485de193a060e4",
+  "files": [
+    {
+      "source": "verification/crates/arkhe-verify-core/src/rbb/mod.rs",
+      "destination": "arkhe/protocol/src/rbb/mod.rs",
+      "source_sha256": "5fe9f0cb48b5312e593d767f7709bb97f5ac8d810ab62052db0b3aa13ea19cb6",
+      "adapted": false
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/src/rbb/header.rs",
+      "destination": "arkhe/protocol/src/rbb/header.rs",
+      "source_sha256": "39c1d8a29825159a8b72fd4337d38703730e9a0816dddca080c1d81016aabe1a",
+      "adapted": false
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/src/rbb/mmr.rs",
+      "destination": "arkhe/protocol/src/rbb/mmr.rs",
+      "source_sha256": "5c3ebed14b4616545aae23a8430f93e4cf5dca8496c2b3889f253f6ee3559661",
+      "adapted": false
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/src/rbb/trust.rs",
+      "destination": "arkhe/protocol/src/rbb/trust.rs",
+      "source_sha256": "c3176aad7e544f41f063e64645c3ca9362b29ca4110800c488e2a923079aca24",
+      "adapted": false
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/tests/rbb_protocol.rs",
+      "destination": "arkhe/protocol/tests/rbb_protocol.rs",
+      "source_sha256": "9c5f0e38203f7a01fd38e1fa836143fb7bc63dd352297daa4a8adb3661a22558",
+      "adapted": true
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/tests/rbb_trust.rs",
+      "destination": "arkhe/protocol/tests/rbb_trust.rs",
+      "source_sha256": "cc892127dfb2bae109b40e2676cd9fe357461200a4f2fce7859610cad394b50b",
+      "adapted": true
+    },
+    {
+      "source": "verification/crates/arkhe-verify-core/examples/rbb_sign_fixture.rs",
+      "destination": "arkhe/protocol/examples/rbb_sign_fixture.rs",
+      "source_sha256": "b331610a82d5d50a874887cbee73bd3711138fbf39a2c6709318e58731baf598",
+      "adapted": true
+    },
+    {
+      "source": "integration/arkhe-rbb/package.json",
+      "destination": "arkhe/package.json",
+      "source_sha256": "0c337b99aa8c5575181280ff3106e8fb30afc04b2858089dec18faef4a65cd7a",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/package-lock.json",
+      "destination": "arkhe/package-lock.json",
+      "source_sha256": "2e1eac4e468738781967229a53976b9cf630e50433c479650b8af67594b966ca",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/contracts/ArkheCheckpointAnchor.sol",
+      "destination": "arkhe/contracts/ArkheCheckpointAnchor.sol",
+      "source_sha256": "0500bd96b9dd8eeb6cb3a6c8e1cf8a3f12bb319ec11aab8f55aaaa632ac6d06b",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/contracts/fixtures/RegistryFixture.sol",
+      "destination": "arkhe/contracts/fixtures/RegistryFixture.sol",
+      "source_sha256": "a5beddb700816f43421ca6ab201425019b24509defc16bd3c1d57d8dd6536a0b",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/fixtures/protocol-v3.json",
+      "destination": "arkhe/fixtures/protocol-v3.json",
+      "source_sha256": "bcf552aeb322cff66cd0dedfbdf2a56e516cca7767caa593ad587bff19437321",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/python/reference_vectors.py",
+      "destination": "arkhe/python/reference_vectors.py",
+      "source_sha256": "42618ff83226f1e5da5bdd9709cd5f35e8e40d520c5eb3ddc4e6d6d0ba870e27",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/python/requirements.txt",
+      "destination": "arkhe/python/requirements.txt",
+      "source_sha256": "f5bc42b12863276b4b4afe834829d79ac11b04a0d7172439d503a6f8b6ac57bf",
+      "adapted": false
+    },
+    {
+      "source": "integration/arkhe-rbb/tests/evm.test.mjs",
+      "destination": "arkhe/tests/evm.test.mjs",
+      "source_sha256": "e8a098345eb0d3147274471f70ebd9f87998506cd016e85075f7b21673250cde",
+      "adapted": true
+    },
+    {
+      "source": "docs/ARKHE-RBB-REVISAO-SEGURANCA-2026-10-28.md",
+      "destination": "arkhe/docs/ARKHE-RBB-REVISAO-SEGURANCA-2026-10-28.md",
+      "source_sha256": "862c3df1e2bc86ccf5cf61403a850d4046374320d2b7dbc62c8629c0f35e6d71",
+      "adapted": false
+    },
+    {
+      "source": "docs/ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.1.md",
+      "destination": "arkhe/docs/ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.1.md",
+      "source_sha256": "640b9cc58d0dfa8cb074a3beec5e65b8e6e60bad7cc571af254bb802bf9d6bf6",
+      "adapted": false
+    },
+    {
+      "source": "docs/ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.2.md",
+      "destination": "arkhe/docs/ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.2.md",
+      "source_sha256": "6934858ce09826aaeff75b994860c7b0f40d64a18fa6037c9d1fc72ccb116e91",
+      "adapted": false
+    },
+    {
+      "source": "docs/ARKHE-RBB-ARQUITETURA-v0.2.md",
+      "destination": "arkhe/docs/ARKHE-RBB-ARQUITETURA-v0.2.md",
+      "source_sha256": "77d14d6e1fde498832922e7843c023d565b1824f7330125ec4a0914fe1a5f883",
+      "adapted": true
+    },
+    {
+      "source": "docs/ARKHE-RBB-ARQUITETURA-VALIDACAO-v0.2.json",
+      "destination": "arkhe/docs/ARKHE-RBB-ARQUITETURA-VALIDACAO-v0.2.json",
+      "source_sha256": "4654d94ca0619a4e96368428e102063b52fac03a547f8d88aa476e281eba7019",
+      "adapted": false
+    }
+  ]
+}
