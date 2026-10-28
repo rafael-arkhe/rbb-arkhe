@@ -12,5 +12,8 @@
     "Durable PostgreSQL/outbox not implemented",
     "No operational witness infrastructure",
     "No live SAPL/Fabric/RBB integration"
-  ]
+  ],
+  "node_tests_passed": 10,
+  "install_lockfile_regression_tests_passed": 1,
+  "npm_clean_install": "PASS on Windows with npm 10.9.9 after reproducing EBADPLATFORM with original lockfile"
 }

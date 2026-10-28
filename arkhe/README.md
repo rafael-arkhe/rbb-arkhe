@@ -34,6 +34,8 @@ npm --prefix arkhe test
 
 O teste integrado espera o exemplo Rust em `arkhe/protocol/target/debug/examples/`; se `CARGO_TARGET_DIR` foi alterado, informar `ARKHE_RBB_FIXTURE_BIN`. O runner falha em divergência dos vetores, não os regenera. Dependências Node e Python são ferramentas locais de teste.
 
+A CI usa Node 22 e npm 10.9.9, identificado também por `packageManager`. O lockfile mantém `fsevents` como dependência opcional do watcher do Ganache: o pacote é exclusivo de macOS e deve ser ignorado por instalações Windows/Linux. O teste de instalação protege essa classificação, além dos nove testes EVM. O runner registra as versões efetivamente utilizadas nos logs.
+
 ## Estado e limites
 
 [Resultados e alcance](docs/EXECUCAO.md), [arquitetura v0.2](docs/ARKHE-RBB-ARQUITETURA-v0.2.md), [especificação](docs/ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.2.md) e [revisão de segurança](docs/ARKHE-RBB-REVISAO-SEGURANCA-2026-10-28.md).
