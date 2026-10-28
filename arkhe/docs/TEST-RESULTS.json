@@ -1,0 +1,16 @@
+{
+  "scope": "standalone fork local execution",
+  "base_commit": "a3069c60eabb0f99535fe904b9485de193a060e4",
+  "rust_tests_passed": 15,
+  "evm_tests_passed": 9,
+  "python_reference": "PASS: ABI/Keccak and eight MMR roots",
+  "clippy": "PASS with -D warnings",
+  "ci_execution": "Local validation snapshot before publication; consult pull request checks for remote CI",
+  "production_deployment": false,
+  "limitations": [
+    "RegistryFixture is test-only",
+    "Durable PostgreSQL/outbox not implemented",
+    "No operational witness infrastructure",
+    "No live SAPL/Fabric/RBB integration"
+  ]
+}

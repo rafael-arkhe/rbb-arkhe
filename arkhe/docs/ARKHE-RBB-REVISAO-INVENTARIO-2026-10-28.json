@@ -1,0 +1,244 @@
+{
+  "review_date": "2026-10-28",
+  "method": "static_review_and_primary_source_comparison",
+  "source_path": "Texto colado.txt (anexo privado; nao distribuido no repositorio)",
+  "source_sha256": "dfba3b4b265ad61e2b2b855fd1adaa160636333e658a88f0bd713ded97a540b3",
+  "source_lines": 6123,
+  "fenced_blocks": [
+    {
+      "start_line": 34,
+      "language": "text",
+      "end_line": 161,
+      "sha256_normalized_lf": "870a332f8404e531fbc10027d4f03854059bcdde7e276c61115c3b37ab4b08cd"
+    },
+    {
+      "start_line": 211,
+      "language": "solidity",
+      "end_line": 757,
+      "sha256_normalized_lf": "f02fdf5903c3319b9d7704409576247ae14dbfd6ade7ea1c2ff57219118e8978"
+    },
+    {
+      "start_line": 778,
+      "language": "toml",
+      "end_line": 806,
+      "sha256_normalized_lf": "9af37ac60db5aaba573b69b04feb96b5d9db2f5658c5652350f33cf13a2aced0"
+    },
+    {
+      "start_line": 812,
+      "language": "rust",
+      "end_line": 1477,
+      "sha256_normalized_lf": "e701eca69fce6b8ab6faf963bde4be8c9a38472831a15d7710383d214e7767f5"
+    },
+    {
+      "start_line": 1485,
+      "language": "bash",
+      "end_line": 1494,
+      "sha256_normalized_lf": "33727d2107585fc0e6eef61a548e362e9793b6d7eb4afc0cbd7c4bd34a67a0ee"
+    },
+    {
+      "start_line": 1498,
+      "language": "javascript",
+      "end_line": 1512,
+      "sha256_normalized_lf": "374a348430475cf9e5df34343f70c1958d8004c2d6997412bccbbca82484afe0"
+    },
+    {
+      "start_line": 1531,
+      "language": "solidity",
+      "end_line": 2050,
+      "sha256_normalized_lf": "9509f40c8b7812a637dc738b075462a10a5774c21fb56caa1f13ae193240d03c"
+    },
+    {
+      "start_line": 2058,
+      "language": "toml",
+      "end_line": 2069,
+      "sha256_normalized_lf": "a2818580b8c3bbb4aab0ed19d96ee43566f6105e63cf14823220996d4edcb035"
+    },
+    {
+      "start_line": 2073,
+      "language": "bash",
+      "end_line": 2080,
+      "sha256_normalized_lf": "7029fa3d19e3c6da8c613107f1aed04e3dde33e3a1910a8a0b061d660750d40c"
+    },
+    {
+      "start_line": 2263,
+      "language": "text",
+      "end_line": 2290,
+      "sha256_normalized_lf": "e230b03751c91eb4b971a402ce39fe8ec3b5cd6c2ad23a48cad4f27394a7b1af"
+    },
+    {
+      "start_line": 2318,
+      "language": "python",
+      "end_line": 2359,
+      "sha256_normalized_lf": "e823057742aa1a2436bc15cc0cd16cf4dedb4da669fd1f9a826d4ffff59c2fc2"
+    },
+    {
+      "start_line": 2367,
+      "language": "python",
+      "end_line": 2402,
+      "sha256_normalized_lf": "d1a98e7abcdaa45118e0420ebd04db8bd71864432e1c928381d5460ebe3de40c"
+    },
+    {
+      "start_line": 2410,
+      "language": "python",
+      "end_line": 2565,
+      "sha256_normalized_lf": "866eafa3da209b604dbc175a76dee8666a8e8db69ed9f8cb3dcc4e9f9461df6a"
+    },
+    {
+      "start_line": 2573,
+      "language": "python",
+      "end_line": 2679,
+      "sha256_normalized_lf": "6c1ba3d9218a6f1cd8e41e8f37c614c2f2df9bae500642543e0fda3497d5861d"
+    },
+    {
+      "start_line": 2704,
+      "language": "text",
+      "end_line": 2732,
+      "sha256_normalized_lf": "f802775bde6b0cdffc2c1aeb54c33fa777e2484e9b9ae57bac8896af084e7392"
+    },
+    {
+      "start_line": 2744,
+      "language": "rust",
+      "end_line": 2778,
+      "sha256_normalized_lf": "6e1e11e984f2e3912a3221020a3141436a9cd108bfaf29726c0181b676a4d279"
+    },
+    {
+      "start_line": 2784,
+      "language": "solidity",
+      "end_line": 2871,
+      "sha256_normalized_lf": "421469a5f311abeba19109e3285645ab7261415267dffe8dda79deff202d08d3"
+    },
+    {
+      "start_line": 2940,
+      "language": "solidity",
+      "end_line": 3486,
+      "sha256_normalized_lf": "f02fdf5903c3319b9d7704409576247ae14dbfd6ade7ea1c2ff57219118e8978"
+    },
+    {
+      "start_line": 3505,
+      "language": "text",
+      "end_line": 3522,
+      "sha256_normalized_lf": "8ea6b6c8f5b7661ab82aef10cd221d5b77f50049b0cc0d4e7ad1b47c3c7150d3"
+    },
+    {
+      "start_line": 3585,
+      "language": "rust",
+      "end_line": 3602,
+      "sha256_normalized_lf": "fd4c0c45c1d0da576136289cc47cecc190c181df95244c227c74e8420d9d98aa"
+    },
+    {
+      "start_line": 3618,
+      "language": "solidity",
+      "end_line": 3628,
+      "sha256_normalized_lf": "08c2acce29b112cd3b20ff02244515dff56d8bbd8ed49f5e803f4c74ce4c3ff1"
+    },
+    {
+      "start_line": 3703,
+      "language": "text",
+      "end_line": 3720,
+      "sha256_normalized_lf": "d9eb47f8db3209825e9d643cffdbbc99b1b1e56405ba9fedf97d1732144871c6"
+    },
+    {
+      "start_line": 3746,
+      "language": "rust",
+      "end_line": 3760,
+      "sha256_normalized_lf": "9e5fd1915c9d83d008cc77ec2d6561ba33f3aacab99547716dec9e04e93435ab"
+    },
+    {
+      "start_line": 3770,
+      "language": "solidity",
+      "end_line": 3788,
+      "sha256_normalized_lf": "8c0429de6b3239900dedf21d9f27caa56db49dacc97bf7a3a3895c69bfae4dae"
+    },
+    {
+      "start_line": 3895,
+      "language": "text",
+      "end_line": 3899,
+      "sha256_normalized_lf": "52355c6b76e5a22326e490c24f774af06db6f85d26d4f1e3543e9746861a6c08"
+    },
+    {
+      "start_line": 4038,
+      "language": "text",
+      "end_line": 4042,
+      "sha256_normalized_lf": "9395462a1c4593c9c025ac3378694fb0a470124ab4c2882e02139f48536320a6"
+    },
+    {
+      "start_line": 4086,
+      "language": "bash",
+      "end_line": 4095,
+      "sha256_normalized_lf": "82878a64cb9b661c1a8c33d2e16a4aeea7adb0cf6b073494ae2142db52ef64b9"
+    },
+    {
+      "start_line": 4109,
+      "language": "text",
+      "end_line": 4111,
+      "sha256_normalized_lf": "fd2bddf44f3b524f5b02a55b0e029f465a95a97ca77381fb37c7a657806ebec0"
+    },
+    {
+      "start_line": 4227,
+      "language": "text",
+      "end_line": 4244,
+      "sha256_normalized_lf": "4f26be967d3f878f9e0f2cbd8b79410f4b1dd7dc58bdb8ad68fa5cc17715fe64"
+    },
+    {
+      "start_line": 4456,
+      "language": "text",
+      "end_line": 4473,
+      "sha256_normalized_lf": "1e78ec4fc001447a18d644142fceea932aee03f38c2f9449d9eae0f0818c2661"
+    },
+    {
+      "start_line": 4483,
+      "language": "rust",
+      "end_line": 4495,
+      "sha256_normalized_lf": "db5440e1af0a64bfe62bd0e9158689e192e806e8ec75f25087ac1d7653594921"
+    },
+    {
+      "start_line": 4499,
+      "language": "rust",
+      "end_line": 4512,
+      "sha256_normalized_lf": "d2224faf8bfc31057164d6d7bf96a2c84ed36f947c7a156e55261623bdd812d0"
+    },
+    {
+      "start_line": 4912,
+      "language": "rust",
+      "end_line": 4923,
+      "sha256_normalized_lf": "6e7e78c75864ca0b1dd1de1d868cc9b7873f005e326d9594ab0eb96b7078cca4"
+    },
+    {
+      "start_line": 5080,
+      "language": "solidity",
+      "end_line": 5093,
+      "sha256_normalized_lf": "c56cf5422895c2e2e904be4dd8ec89340ed26eda1736f8e6aa328aed3b4f3364"
+    },
+    {
+      "start_line": 5296,
+      "language": "text",
+      "end_line": 5330,
+      "sha256_normalized_lf": "51157cbf3514107249f43ebc4aa94992e3741a0874babfb635786ddf723da635"
+    },
+    {
+      "start_line": 5357,
+      "language": "rust",
+      "end_line": 5695,
+      "sha256_normalized_lf": "f8c91a73b63db7173d6ec6dd76aa0e4e7feb5eef67ea524be4e265ad4c10b493"
+    },
+    {
+      "start_line": 5703,
+      "language": "solidity",
+      "end_line": 5796,
+      "sha256_normalized_lf": "73d8567f7c77315b0539e81c8bd40e861ea4e45d90c626cab5d72099e4c23fef"
+    },
+    {
+      "start_line": 5815,
+      "language": "rust",
+      "end_line": 6122,
+      "sha256_normalized_lf": "3868ed83454511011959ee4a48a350a2742a5ebf1162c816295f04259426aab1"
+    }
+  ],
+  "unclosed_fence": false,
+  "limitations": [
+    "No source projects compiled",
+    "No Foundry/Rust suites executed",
+    "No network deployment or exploitation performed",
+    "Runtime and library API compatibility remain pending"
+  ]
+}

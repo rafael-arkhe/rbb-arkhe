@@ -1,0 +1,8 @@
+{
+  "name": "arkhe-rbb-execution-tests",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": { "test": "node --test tests/evm.test.mjs" },
+  "devDependencies": { "ethers": "6.15.0", "ganache": "7.9.2", "solc": "0.8.30" }
+}

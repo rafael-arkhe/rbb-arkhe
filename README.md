@@ -177,3 +177,8 @@ A RBB utiliza regras de [versionamento semântico](versionamento.md) para seu c�
 Em caso de dúvidas e sugestões, entre em contato através do e-mail [rbb@bndes.gov.br](#).
 
 O servidor do Discord é público, entre por [esse convite](https://discord.gg/RzyUpmGqTT).
+
+
+## Camada experimental Arkhe neste fork
+
+Este fork inclui uma camada opcional de evidências em [arkhe/](arkhe/README.md), com protocolo, verificação híbrida, contrato experimental e testes locais reproduzíveis. Consulte o [escopo e as limitações](arkhe/docs/EXECUCAO.md). A extensão é uma proposta experimental deste fork, sem declaração de aprovação institucional ou implantação na rede RBB.

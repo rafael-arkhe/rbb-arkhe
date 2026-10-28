@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-28",
+  "scope": "Documentation consistency and static ABI size arithmetic; no runtime protocol implementation tested",
+  "documents": [
+    {
+      "file": "ARKHE-RBB-ARQUITETURA-v0.2.md",
+      "fences_and_local_links": "pass"
+    },
+    {
+      "file": "ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.2.md",
+      "fences_and_local_links": "pass"
+    },
+    {
+      "file": "ARKHE-RBB-ESPECIFICACAO-TECNICA-v0.1.md",
+      "fences_and_local_links": "pass"
+    },
+    {
+      "file": "ARKHE-RBB-REVISAO-SEGURANCA-2026-10-28.md",
+      "fences_and_local_links": "pass"
+    }
+  ],
+  "header_fields": [
+    {
+      "position": 0,
+      "name": "protocol_version",
+      "type_or_semantics": "uint8, exatamente 3"
+    },
+    {
+      "position": 1,
+      "name": "profile_id",
+      "type_or_semantics": "uint16, catálogo do perfil criptográfico"
+    },
+    {
+      "position": 2,
+      "name": "anchor_chain_id",
+      "type_or_semantics": "uint256"
+    },
+    {
+      "position": 3,
+      "name": "anchor_genesis_hash",
+      "type_or_semantics": "bytes32"
+    },
+    {
+      "position": 4,
+      "name": "registry_address",
+      "type_or_semantics": "address"
+    },
+    {
+      "position": 5,
+      "name": "anchor_address",
+      "type_or_semantics": "address"
+    },
+    {
+      "position": 6,
+      "name": "org_id",
+      "type_or_semantics": "bytes32"
+    },
+    {
+      "position": 7,
+      "name": "power",
+      "type_or_semantics": "uint8 1/2/3, conferido com registro"
+    },
+    {
+      "position": 8,
+      "name": "stream_id",
+      "type_or_semantics": "bytes32"
+    },
+    {
+      "position": 9,
+      "name": "sequence",
+      "type_or_semantics": "uint64, começa em 1"
+    },
+    {
+      "position": 10,
+      "name": "prev_checkpoint_id",
+      "type_or_semantics": "bytes32, zero se ausente"
+    },
+    {
+      "position": 11,
+      "name": "first_leaf_index",
+      "type_or_semantics": "uint64, primeira folha nova do lote"
+    },
+    {
+      "position": 12,
+      "name": "batch_leaf_count",
+      "type_or_semantics": "uint64, maior que zero"
+    },
+    {
+      "position": 13,
+      "name": "total_leaf_count",
+      "type_or_semantics": "uint64, tamanho cumulativo do MMR"
+    },
+    {
+      "position": 14,
+      "name": "mmr_root",
+      "type_or_semantics": "bytes32, raiz vinculada ao contador"
+    },
+    {
+      "position": 15,
+      "name": "batch_manifest_digest",
+      "type_or_semantics": "bytes32, compromisso da lista ordenada do lote"
+    },
+    {
+      "position": 16,
+      "name": "policy_digest",
+      "type_or_semantics": "bytes32, política que rege este stream"
+    },
+    {
+      "position": 17,
+      "name": "declared_signed_at",
+      "type_or_semantics": "uint64, segundos Unix"
+    },
+    {
+      "position": 18,
+      "name": "source_kind",
+      "type_or_semantics": "uint8: 1 SAPL, 2 Fabric, 3 Judicial, 4 outro aprovado"
+    },
+    {
+      "position": 19,
+      "name": "source_network_id",
+      "type_or_semantics": "bytes32, namespace atribuído à origem"
+    },
+    {
+      "position": 20,
+      "name": "source_manifest_digest",
+      "type_or_semantics": "bytes32, zero se ausente conforme schema"
+    },
+    {
+      "position": 21,
+      "name": "ed25519_key_id",
+      "type_or_semantics": "bytes32, ID autenticado do registro"
+    },
+    {
+      "position": 22,
+      "name": "mldsa_key_id",
+      "type_or_semantics": "bytes32, ID autenticado do registro"
+    },
+    {
+      "position": 23,
+      "name": "keyset_version",
+      "type_or_semantics": "uint64"
+    },
+    {
+      "position": 24,
+      "name": "prev_present",
+      "type_or_semantics": "bool, false apenas na sequência 1"
+    },
+    {
+      "position": 25,
+      "name": "source_manifest_present",
+      "type_or_semantics": "bool, obrigatório true para Fabric"
+    },
+    {
+      "position": 26,
+      "name": "mmr_profile_digest",
+      "type_or_semantics": "bytes32, perfil MMR permitido para o stream"
+    }
+  ],
+  "header_bytes": 864,
+  "signing_preimage_bytes": 896,
+  "envelope_bytes_by_signature_length": {
+    "2420": 3488,
+    "3309": 4384,
+    "4627": 5696
+  },
+  "witnesses": {
+    "n": 4,
+    "quorum": 3,
+    "intersection": 2,
+    "assumed_byzantine_max": 1
+  },
+  "result": "PASS",
+  "pending": [
+    "ABI/hash differential vectors across Rust/Python/Solidity",
+    "Database concurrency and crash tests",
+    "Hybrid signatures and witness verification",
+    "Network confirmation and operational recovery"
+  ]
+}
