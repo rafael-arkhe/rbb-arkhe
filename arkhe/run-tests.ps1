@@ -20,6 +20,8 @@ function Invoke-Stage {
 }
 $success=$false
 try {
+    Invoke-Stage 'node-version' 'node' @('--version') $taskDirectory
+    Invoke-Stage 'npm-version' 'npm.cmd' @('--version') $taskDirectory
     if ($InstallNodeDependencies) {
         Invoke-Stage 'node-install' 'npm.cmd' @('ci','--ignore-scripts','--no-audit','--no-fund') $taskDirectory
     }

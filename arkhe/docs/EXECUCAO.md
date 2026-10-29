@@ -25,6 +25,12 @@ Na execução local desta preparação, as seis etapas passaram: 15 testes Rust 
 
 O workflow `.github/workflows/arkhe-tests.yml` repete a execução em Windows. Os resultados registrados neste documento são da validação local anterior à publicação; a execução remota de CI é apresentada separadamente nos checks do pull request. Nenhuma implantação em rede RBB é executada pelo workflow.
 
+## Correção da instalação em CI
+
+As execuções iniciais de push e pull request falharam em `npm ci` com `EBADPLATFORM`: a entrada do lockfile para `ganache/node_modules/fsevents` não estava marcada como opcional, embora `chokidar` a declare em `optionalDependencies` e o pacote suporte somente Darwin. O npm 10.9.9 do runner Windows rejeitou essa entrada; o npm 11 usado na primeira validação local não a rejeitou.
+
+A falha foi reproduzida em diretório limpo com npm 10.9.9 no Windows. A correção preserva versão e integridade do pacote e restaura sua classificação opcional no lockfile. A CI fixa npm 10.9.9 e o runner registra versões. A suíte Node passa a incluir um teste de regressão do lockfile além dos nove testes EVM; nenhum teste de protocolo foi removido ou ignorado para contornar o erro.
+
 ## Alcance
 
 São testes locais: solc 0.8.30, alvo Shanghai e EVM chain ID 1337. Não houve deploy na RBB nem conexão SAPL/Fabric. O `RegistryFixture` tem setters públicos e é exclusivamente de teste. O anchor registra autorização e compromissos, sem verificar ML-DSA on-chain; a aceitação criptográfica ocorre no verificador Rust sob trust context externo.
