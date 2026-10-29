@@ -1,0 +1,14 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "arkhe/custody/benchmark.mjs": "82cfcc1e9d7ba7367e5b233fc509aea4ee3eb7e8972036916cfc17e43c631973",
+    "arkhe/custody/checkpoint.mjs": "3f60c1e0e81bdd65f07844ecd5064d9bdc5ee9892000de442fb0c139f90e6ac0",
+    "arkhe/custody/cli.mjs": "9d739dcdc99eb187f4a9799357fb1a7a2247c4308523e9781931abe1a7ca289a",
+    "arkhe/custody/core.mjs": "7b3698c4e7aaf68282078c8f4e6f6fa3a99f7a1a6d7569c6e35516d6e9966570",
+    "arkhe/custody/evm-pilot.mjs": "6974f94d88c0e2e02ee7db7b06fbe6bb698c0b628ca8e726e6ba9d4580e056e5",
+    "arkhe/custody/scenarios.mjs": "a4fda472e3152139ab56b499f184497f6365c60b6306f6ca8caa27691815c1c9",
+    "arkhe/package.json": "173d49dcbb112a32cd8c9081463af9f32c6fbeadac8df9dd421d6f0c8b02c162",
+    "arkhe/protocol/examples/custody_bridge.rs": "10c3c1b70e2a99f164e2ee390c94a53b0efbfd3ccff7c7165c1fdc84e1a834f0",
+    "arkhe/run-tests.ps1": "58103da96b5beaf2d78a3b31229f659e0b02028c8499ea34cee5f8178a289c9b"
+  }
+}

@@ -28,7 +28,7 @@ Comandos independentes, válidos também em outros sistemas com os executáveis 
 ```text
 python arkhe/python/reference_vectors.py
 cargo +1.96.0 test --manifest-path arkhe/protocol/Cargo.toml --features rbb-pqc --locked
-cargo +1.96.0 build --manifest-path arkhe/protocol/Cargo.toml --example rbb_sign_fixture --features rbb-pqc --locked
+cargo +1.96.0 build --manifest-path arkhe/protocol/Cargo.toml --examples --features rbb-pqc --locked
 npm --prefix arkhe test
 ```
 
@@ -43,3 +43,9 @@ A CI usa Node 22 e npm 10.9.9, identificado também por `packageManager`. O lock
 O anchor registra autorização/compromissos e não valida ML-DSA na EVM. `RegistryFixture.sol` tem setters públicos e **não deve ser implantado como registro institucional**. Administração governada, registro completo, persistência PostgreSQL/outbox, HSM, testemunhas operacionais e integrações reais SAPL/Fabric/RBB permanecem pendentes. Trust context é entrada independente do host; não pode ser aceito do próprio pacote avaliado. O exemplo de assinatura tem seeds públicas de teste.
 
 O código deste módulo mantém seus avisos de licença; a licença e os documentos herdados do repositório RBB permanecem na raiz. [Proveniência da portabilidade](PROVENANCE.json) identifica os arquivos de origem e as adaptações locais.
+
+## Piloto de conciliação de custódia
+
+O novo [módulo experimental](custody/README.md) confronta três fontes sintéticas, verifica autorizações e produz pacote para replay offline. A suíte inclui 100 transferências de token de teste em EVM local, checkpoint híbrido v3, comparação de evento/armazenamento e substituição real de ramo com snapshot/revert. O [schema](custody/SCHEMA.md) e a [especificação proposta](docs/ARKHE-CUSTODY-PILOTO-ESPECIFICACAO-v0.2.md) distinguem implementação inicial e objetivos mais amplos.
+
+Chaves são públicas de teste; atestado local não prova consenso ou autenticidade adversarial. O piloto usa recomputação completa de um lote MMR; não é custódia de produção, PoR, certificação, homologação RBB ou demonstração de reprodução por terceiro.

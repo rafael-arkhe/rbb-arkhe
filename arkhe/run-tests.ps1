@@ -20,15 +20,18 @@ function Invoke-Stage {
 }
 $success=$false
 try {
-    Invoke-Stage 'node-version' 'node' @('--version') $taskDirectory
+    Invoke-Stage 'node-version' 'node.exe' @('--version') $taskDirectory
     Invoke-Stage 'npm-version' 'npm.cmd' @('--version') $taskDirectory
     if ($InstallNodeDependencies) {
         Invoke-Stage 'node-install' 'npm.cmd' @('ci','--ignore-scripts','--no-audit','--no-fund') $taskDirectory
     }
     Invoke-Stage 'python-reference' $Python @('arkhe/python/reference_vectors.py') $taskRepo
     Invoke-Stage 'rust-tests' 'cargo' @('+1.96.0','test','--manifest-path','arkhe/protocol/Cargo.toml','--features','rbb-pqc','--locked') $taskRepo
-    Invoke-Stage 'fixture-build' 'cargo' @('+1.96.0','build','--manifest-path','arkhe/protocol/Cargo.toml','--example','rbb_sign_fixture','--features','rbb-pqc','--locked') $taskRepo
+    Invoke-Stage 'fixture-build' 'cargo' @('+1.96.0','build','--manifest-path','arkhe/protocol/Cargo.toml','--examples','--features','rbb-pqc','--locked') $taskRepo
     Invoke-Stage 'evm-tests' 'npm.cmd' @('test') $taskDirectory
+    Invoke-Stage 'custody-pilot' 'node.exe' @('arkhe/custody/evm-pilot.mjs') $taskRepo
+    Invoke-Stage 'custody-replay' 'node.exe' @('arkhe/custody/cli.mjs','verify','arkhe/test-results/custody/package.json','arkhe/test-results/custody/trust.json') $taskRepo
+    Invoke-Stage 'custody-benchmark' 'node.exe' @('arkhe/custody/benchmark.mjs','1000') $taskRepo
     Invoke-Stage 'clippy' 'cargo' @('+1.96.0','clippy','--manifest-path','arkhe/protocol/Cargo.toml','--features','rbb-pqc','--lib','--tests','--examples','--locked','--','-D','warnings') $taskRepo
     $success=$true
 } finally {
