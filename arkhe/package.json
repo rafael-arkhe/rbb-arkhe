@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "packageManager": "npm@10.9.9",
-  "scripts": { "test": "node --test tests/install-contract.test.mjs tests/evm.test.mjs" },
+  "scripts": {
+    "test": "node --test tests/install-contract.test.mjs tests/evm.test.mjs tests/custody.test.mjs tests/custody-evm.test.mjs",
+    "custody:pilot": "node custody/evm-pilot.mjs",
+    "custody:benchmark": "node custody/benchmark.mjs"
+  },
   "devDependencies": { "ethers": "6.15.0", "ganache": "7.9.2", "solc": "0.8.30" }
 }
