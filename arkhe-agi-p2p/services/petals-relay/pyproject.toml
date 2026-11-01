@@ -1,0 +1,8 @@
+[project]
+name = "petals-relay"
+version = "0.1.0"
+description = "Petals relay server for layer swarming"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.0",
+]
