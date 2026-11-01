@@ -1,0 +1,36 @@
+[package]
+name = "arkhe-agi-p2p-tests"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+arkhe-core = { path = "../crates/common/arkhe-core" }
+arkhe-crypto = { path = "../crates/common/arkhe-crypto" }
+arkhe-test-utils = { path = "../crates/common/arkhe-test-utils" }
+arkhe-omninode-client = { path = "../crates/l1-distribution/arkhe-omninode-client" }
+arkhe-hyperspace-sdk = { path = "../crates/l1-distribution/arkhe-hyperspace-sdk" }
+arkhe-petals-adapter = { path = "../crates/l1-distribution/arkhe-petals-adapter" }
+arkhe-afir = { path = "../crates/l2-provenance/arkhe-afir" }
+arkhe-spice = { path = "../crates/l2-provenance/arkhe-spice" }
+arkhe-inference-router = { path = "../crates/l2-provenance/arkhe-inference-router" }
+arkhe-mobile-wer = { path = "../crates/l3-evidence/arkhe-mobile-wer" }
+arkhe-mobile-mmr = { path = "../crates/l3-evidence/arkhe-mobile-mmr" }
+arkhe-mobile-verify = { path = "../crates/l3-evidence/arkhe-mobile-verify" }
+arkhe-openclaw = { path = "../crates/l4-governance/arkhe-openclaw" }
+arkhe-ann-spec = { path = "../crates/l4-governance/arkhe-ann-spec" }
+rand.workspace = true
+rand_core.workspace = true
+tokio.workspace = true
+
+[[test]]
+name = "l1_to_l2_flow"
+path = "e2e/l1_to_l2_flow.rs"
+
+[[test]]
+name = "l2_to_l3_binding"
+path = "e2e/l2_to_l3_binding.rs"
+
+[[test]]
+name = "offline_verification"
+path = "e2e/offline_verification.rs"

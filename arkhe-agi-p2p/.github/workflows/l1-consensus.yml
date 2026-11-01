@@ -1,0 +1,9 @@
+name: L1 Consensus
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test -p arkhe-omninode-client -p arkhe-hyperspace-sdk -p arkhe-petals-adapter
