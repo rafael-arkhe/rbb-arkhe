@@ -1,6 +1,11 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
+pub mod extensions;
+pub use extensions::{
+    ArkheExtension, ArkheFileValidator, ArkheLayer, ExtensionRequirement, FileValidationError,
+};
+
 pub const DOMAIN_MOBILE_ACTION: &[u8] = b"AKG:MOBILE:ACT:v1\0";
 pub const DOMAIN_MOBILE_CHECKPOINT: &[u8] = b"AKG:MOBILE:CHECKPOINT:v1\0";
 pub const DOMAIN_AFIR_RECEIPT: &[u8] = b"AKG:AFIR:RECEIPT:v1\0";
