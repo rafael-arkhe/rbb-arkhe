@@ -22,3 +22,6 @@ A arquitetura organiza os projetos complementares em quatro camadas em profundid
 │ OmniNode (BLAKE3 → CIDv1, SUM Chain)                                │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+## Especificação Normativa de Arquivos e Extensões
+O ecossistema Arkhe adota um padrão normativo estrito para todas as extensões e formatos de arquivo utilizados em suas 9 camadas lógicas (identidade, manifestos, evidências, rede, inferência, verificação, governança, CAL e supply chain). Consulte [FILE_EXTENSIONS.md](./FILE_EXTENSIONS.md) para a matriz completa de extensões, restrições e auditoria fail-closed.
