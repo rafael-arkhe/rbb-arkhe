@@ -1,10 +1,9 @@
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
 
-const owner = "0xb18322Ea7c9AB4d47e29534A2E352e8A9e3beeFD";
-const tx = "0xa48d2d40a951111762ff27ff6a8b06b2d55f9a29a9e01291cbf4b6bf380c59dd";
 const token = "0xdac17f958d2ee523a2206206994597c13d831ec7";
 const transfer = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
 const support = "https://cs.tether.to/TR";
@@ -13,11 +12,22 @@ const topic = (address) => "0x" + address.toLowerCase().slice(2).padStart(64, "0
 const { values } = parseArgs({
   options: {
     output: { type: "string" },
+    "transaction-hash": { type: "string" },
+    owner: { type: "string" },
     rpc: { type: "string", default: "https://ethereum-rpc.publicnode.com" },
+    "qvac-root": { type: "string" },
     "qvac-config": { type: "string" },
   },
 });
-if (!values.output) throw new Error("usage: node src/tether-recovery.mjs --output <new-directory> [--qvac-config config.json]");
+if (!values.output || !/^0x[0-9a-fA-F]{64}$/.test(values["transaction-hash"] ?? "")
+    || !/^0x[0-9a-fA-F]{40}$/.test(values.owner ?? "")) {
+  throw new Error("usage: node src/tether-recovery.mjs --transaction-hash <tx> --owner <address> --output <new-directory>");
+}
+if (Boolean(values["qvac-root"]) !== Boolean(values["qvac-config"])) {
+  throw new Error("--qvac-root and --qvac-config must be provided together");
+}
+const owner = values.owner;
+const tx = values["transaction-hash"].toLowerCase();
 const endpoint = new URL(values.rpc);
 if (endpoint.protocol !== "https:" || endpoint.username || endpoint.password) {
   throw new Error("use an HTTPS Ethereum RPC URL without credentials in userinfo");
@@ -110,8 +120,9 @@ await Promise.all([
 ]);
 
 if (values["qvac-config"]) {
-  const { loadConfig } = await import("./config.mjs");
-  const { startWorker } = await import("./worker.mjs");
+  const adapter = resolve(values["qvac-root"], "src");
+  const { loadConfig } = await import(pathToFileURL(join(adapter, "config.mjs")).href);
+  const { startWorker } = await import(pathToFileURL(join(adapter, "worker.mjs")).href);
   const worker = await startWorker(await loadConfig(values["qvac-config"]));
   try {
     const expected = `The Ethereum receipt for ${tx} records ${amount} USDt sent to the USDt token contract ${token}.`;
