@@ -1,0 +1,364 @@
+openapi: 3.1.0
+info:
+  title: Gateway Arkhe–QVAC
+  version: 0.1.0
+  summary: Contrato candidato para inferência local com evidência verificável.
+  description: |
+    O gateway recebe intenções de geração de texto e delega a inferência a um
+    runtime QVAC configurado pelo operador. O protótipo Tucano–QVAC existente
+    usa MCP. As rotas HTTP deste contrato ainda são propostas.
+
+    O gateway autentica o solicitante e aplica a política antes de despachar.
+    O runtime não recebe chaves de assinatura, credenciais do gateway ou
+    capacidade de executar ferramentas externas. Apenas modelos e runtimes
+    previamente fixados são elegíveis. Pagamentos, assinatura de transações
+    e chamadas WDK ficam fora deste perfil.
+
+    Uma execução só chega a succeeded após a verificação local e a publicação
+    durável dos três artefatos. A verificação offline exige chaves públicas
+    confiáveis obtidas por canal independente. O perfil inicial usa chaves de
+    software e declara a atestação de hardware como NOT_VERIFIED.
+externalDocs:
+  description: Referência oficial do runtime QVAC.
+  url: https://docs.qvac.tether.io/sdk/ai-capabilities/text-generation/
+servers:
+  - url: https://{host}
+    description: Gateway HTTPS operado pela Arkhe. Host ilustrativo.
+    variables:
+      host:
+        default: gateway.example.invalid
+security:
+  - bearerAuth: []
+tags:
+  - name: Executions
+  - name: Evidence
+paths:
+  /v1/executions:
+    post:
+      tags: [Executions]
+      operationId: createExecution
+      summary: Admitir uma inferência assíncrona.
+      description: |
+        O servidor valida o corpo, a identidade, os limites, a política fixada
+        e os identificadores do modelo antes de despachar. A admissão e a
+        reserva da chave de idempotência devem ser persistidas atomicamente.
+        Use a mesma chave e os mesmos bytes UTF-8 do corpo nas retentativas.
+        A chave é vinculada ao principal autenticado e à operação. Uma
+        repetição idêntica devolve a mesma execução, inclusive enquanto
+        estiver pendente. Reutilização com outro corpo devolve 409.
+        A associação deve permanecer disponível por toda a retenção da execução.
+        Uma execução de efeito incerto requer reconciliação antes de redispatch.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9_-]{16,128}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExecution'
+            example:
+              kind: qvac.text.generate
+              policy_digest: '1111111111111111111111111111111111111111111111111111111111111111'
+              model_id: arkhe-local
+              prompt: Escreva uma frase sobre um tucano.
+              max_output_tokens: 64
+      responses:
+        '202':
+          description: Admitida e registrada para execução.
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+              description: Caminho do recurso de execução.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '200':
+          description: Retorno da execução existente para uma repetição idêntica.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '400':
+          description: JSON inválido, com chaves duplicadas, ou cabeçalho ausente ou inválido.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '403':
+          description: Política rejeitada ou indisponível. A inferência não é despachada.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '413':
+          description: Corpo excede o limite de bytes do gateway.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Intenção fora do perfil, parâmetros inválidos ou modelo não registrado.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Unavailable'
+  /v1/executions/{executionId}:
+    parameters:
+      - $ref: '#/components/parameters/ExecutionId'
+    get:
+      tags: [Executions]
+      operationId: getExecution
+      summary: Consultar o estado de uma execução.
+      responses:
+        '200':
+          description: Estado da execução e metadados dos artefatos, se publicados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/Unavailable'
+  /v1/executions/{executionId}/artifacts/{artifact}:
+    parameters:
+      - $ref: '#/components/parameters/ExecutionId'
+      - name: artifact
+        in: path
+        required: true
+        schema:
+          type: string
+          enum: [bundle.ovb, manifest.json, output.txt]
+    get:
+      tags: [Evidence]
+      operationId: getExecutionArtifact
+      summary: Baixar os bytes exatos de um artefato selado.
+      description: |
+        A autorização usa o mesmo escopo da execução. O servidor entrega os
+        bytes sem reserializar o JSON nem alterar as quebras de linha do
+        texto. Confira o SHA-256 anunciado antes de usar o verificador.
+        Para validar a saída, confira o vínculo de output.txt ao recibo com
+        o manifesto e a chave de confiança fixada fora do bundle.
+      responses:
+        '200':
+          description: Artefato imutável da execução concluída.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthenticated'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '503':
+          $ref: '#/components/responses/Unavailable'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Token do gateway vinculado a um principal e aos escopos de execução e leitura.
+  parameters:
+    ExecutionId:
+      name: executionId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    Digest:
+      type: string
+      pattern: '^[0-9a-f]{64}$'
+    CreateExecution:
+      type: object
+      additionalProperties: false
+      required: [kind, policy_digest, model_id, prompt, max_output_tokens]
+      properties:
+        kind:
+          const: qvac.text.generate
+        policy_digest:
+          $ref: '#/components/schemas/Digest'
+          description: BLAKE3 da política esperada. O servidor resolve e avalia sua própria política autorizada.
+        model_id:
+          type: string
+          pattern: '^[A-Za-z0-9._:-]{1,96}$'
+          description: Alias do catálogo local. O gateway fixa os bytes do modelo e do runtime antes do despacho.
+        prompt:
+          type: string
+          minLength: 1
+          maxLength: 32768
+          description: Entrada textual. O servidor também aplica limites de bytes e tokens.
+        max_output_tokens:
+          type: integer
+          minimum: 1
+          maximum: 2048
+          description: Limite solicitado, sujeito a um teto inferior da política.
+    Execution:
+      type: object
+      additionalProperties: false
+      required: [execution_id, status, policy_digest, request_blake3, created_at]
+      properties:
+        execution_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [queued, running, sealing, succeeded, failed, reconciliation_required]
+        policy_digest:
+          $ref: '#/components/schemas/Digest'
+        request_blake3:
+          $ref: '#/components/schemas/Digest'
+          description: BLAKE3 dos bytes UTF-8 do corpo de admissão, separado do compromisso AFiR sobre a requisição ao runtime.
+        created_at:
+          type: string
+          format: date-time
+          description: Hora declarada pelo gateway.
+        evidence:
+          $ref: '#/components/schemas/Evidence'
+        error:
+          $ref: '#/components/schemas/ExecutionError'
+      allOf:
+        - if:
+            properties:
+              status:
+                const: succeeded
+          then:
+            required: [evidence]
+            not:
+              required: [error]
+          else:
+            not:
+              required: [evidence]
+        - if:
+            properties:
+              status:
+                enum: [failed, reconciliation_required]
+          then:
+            required: [error]
+          else:
+            not:
+              required: [error]
+    Evidence:
+      type: object
+      additionalProperties: false
+      required: [checkpoint_id, trust_set_id, scope, attestation, bundle, manifest, output]
+      properties:
+        checkpoint_id:
+          $ref: '#/components/schemas/Digest'
+        trust_set_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Identificador do conjunto de chaves fixado por canal independente.
+        scope:
+          const: SAME_HOST
+        attestation:
+          const: NOT_VERIFIED
+        bundle:
+          $ref: '#/components/schemas/Artifact'
+          description: OfflineVerificationBundle AFiR, disponível como bundle.ovb.
+        manifest:
+          $ref: '#/components/schemas/Artifact'
+          description: Manifesto da execução, disponível como manifest.json.
+        output:
+          $ref: '#/components/schemas/Artifact'
+          description: Saída textual UTF-8, disponível como output.txt.
+    Artifact:
+      type: object
+      additionalProperties: false
+      required: [sha256, bytes]
+      properties:
+        sha256:
+          $ref: '#/components/schemas/Digest'
+        bytes:
+          type: integer
+          minimum: 0
+    ExecutionError:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          enum: [RUNTIME_FAILED, SEAL_FAILED, RECONCILIATION_REQUIRED]
+        message:
+          type: string
+          maxLength: 512
+          description: Mensagem pública sem prompt, stack trace ou credenciais.
+    Problem:
+      type: object
+      required: [title, status, code]
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+          minimum: 400
+          maximum: 599
+        code:
+          type: string
+          enum: [BAD_REQUEST, UNAUTHENTICATED, POLICY_DENIED, NOT_FOUND, IDEMPOTENCY_CONFLICT, EVIDENCE_NOT_READY, REQUEST_TOO_LARGE, UNSUPPORTED_INTENT, INVALID_PARAMETERS, MODEL_UNAVAILABLE, RATE_LIMITED, SERVICE_UNAVAILABLE]
+  responses:
+    Unauthenticated:
+      description: Credencial ausente ou inválida.
+      headers:
+        WWW-Authenticate:
+          schema:
+            type: string
+            const: Bearer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    NotFound:
+      description: Recurso inexistente ou fora do escopo do principal.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Conflict:
+      description: Chave reutilizada com outro corpo ou artefato ainda indisponível.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    RateLimited:
+      description: Limite operacional atingido.
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+            minimum: 1
+          description: Intervalo sugerido em segundos.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Unavailable:
+      description: Serviço temporariamente indisponível.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'

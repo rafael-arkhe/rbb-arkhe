@@ -1,0 +1,15 @@
+Subject: Request for recovery of USDt sent to the Ethereum token contract
+
+I, the owner of the address 0xb18322Ea7c9AB4d47e29534A2E352e8A9e3beeFD, am requesting assistance from Tether to recover the funds sent in TX 0xa48d2d40a951111762ff27ff6a8b06b2d55f9a29a9e01291cbf4b6bf380c59dd and return them to 0xb18322Ea7c9AB4d47e29534A2E352e8A9e3beeFD.
+
+Transaction ID: 0xa48d2d40a951111762ff27ff6a8b06b2d55f9a29a9e01291cbf4b6bf380c59dd
+Protocol / blockchain: Ethereum (ERC-20)
+Deposit address: 0xdac17f958d2ee523a2206206994597c13d831ec7
+Amount: 10006.874723 USDt
+Requested return address: 0xb18322Ea7c9AB4d47e29534A2E352e8A9e3beeFD
+
+The transaction receipt records a USDt transfer from my address to the USDt token contract.
+Please assess whether recovery is possible.
+
+Additional events leading to the transfer: [complete before submitting]
+Actions already taken to recover the funds: [complete before submitting, if applicable]

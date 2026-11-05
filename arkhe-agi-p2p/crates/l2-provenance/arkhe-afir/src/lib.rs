@@ -1,4 +1,5 @@
 pub mod receipt;
+pub mod retrieval;
 pub mod signer;
 pub mod verifier;
 
