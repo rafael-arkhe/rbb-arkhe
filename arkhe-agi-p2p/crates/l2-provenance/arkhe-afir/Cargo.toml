@@ -7,6 +7,7 @@ license.workspace = true
 [dependencies]
 arkhe-core = { path = "../../common/arkhe-core" }
 arkhe-crypto = { path = "../../common/arkhe-crypto" }
+fips204.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true

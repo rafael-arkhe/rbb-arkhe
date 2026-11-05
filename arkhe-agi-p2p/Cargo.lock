@@ -9,6 +9,7 @@ dependencies = [
  "arkhe-core",
  "arkhe-crypto",
  "blake3",
+ "fips204",
  "hex",
  "serde",
  "serde_json",
